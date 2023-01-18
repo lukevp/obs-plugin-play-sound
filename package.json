@@ -1,0 +1,16 @@
+{
+  "name": "obs-plugin-play-sound",
+  "version": "1.0.0",
+  "description": "OBS Plugin to play a sound when an event happens",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Luke Paireepinart",
+  "license": "ISC",
+  "dependencies": {
+    "obs-websocket-js": "^5.0.2"
+  }
+}
