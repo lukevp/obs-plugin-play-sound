@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>OBS Live Preview and Recording Monitor</title>
+</head>
+<body>
+  <img id="screenshot" src="https://www.w3schools.com/w3images/lights.jpg" alt="Lights" style="width:100%">
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io({
+      auth: {
+        serverOffset: 0
+      },
+      ackTimeout: 10000,
+      retries: 3,
+    });
+
+    socket.on('recording_state_change', (msg, serverOffset) => {
+        document.body.style.backgroundColor = msg === 'STARTED' ? 'red' : 'blue';
+        console.log('recording state changed to', msg);
+    });
+
+    socket.on("screenshot", function(data) {
+        document.getElementById('screenshot').src = data;
+    });
+    socket.on("no_feed", function(data) {
+        if (document.body.style.backgroundColor !== 'white') {
+            document.body.style.backgroundColor = 'white';
+        document.getElementById('screenshot').src = "https://www.w3schools.com/w3images/lights.jpg";
+        }
+    })
+  </script>
+</body>
+</html>
